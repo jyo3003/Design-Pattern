@@ -5,7 +5,7 @@ public class Main {
         Facade facade = new Facade();
         boolean bool = facade.login(); //calling the login function in Facade class.
         // If neither buyer nor seller info matches the user entered credentials
-        if(bool == false){
+        if(!bool){
             System.out.println("Invalid Credentials, Please try again!!!");
         }
     }

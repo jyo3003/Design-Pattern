@@ -1,4 +1,4 @@
 public class UserInfoItem {
     String name;
-    int userType;
+    UserType usertype;
 }

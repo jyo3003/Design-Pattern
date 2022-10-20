@@ -5,20 +5,32 @@ public class ProductIterator {
 	private ClassProductList classProductList;
 
 	public boolean hasNext(Iterator classProductListIterator) {
-		return classProductListIterator.hasNext();
+		if(classProductListIterator != null) {
+			return classProductListIterator.hasNext();
+		}
+		return false;
 	}
 
-	public Product Next() {
-
-
-		return null;
+	@SuppressWarnings("rawtypes")
+	public Product Next(Iterator classProductListIterator) {
+		if (this.hasNext(classProductListIterator)) {
+			return (Product) classProductListIterator.next();
+		} else {
+			return null;
+		}
 	}
 
-	public void MoveToHead() {
-
+	@SuppressWarnings("rawtypes")
+	public void MoveToHead(Iterator classProductListIterator) {
+		System.out.println("Head is moved..");
 	}
 
-	public void Remove() {
+
+	@SuppressWarnings("rawtypes")
+	public void Remove(Iterator classProductListIterator) {
+		if (this.hasNext(classProductListIterator)) {
+			classProductListIterator.next();
+		}
 
 	}
 

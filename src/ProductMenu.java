@@ -1,6 +1,9 @@
+import java.io.FileNotFoundException;
+import java.util.Iterator;
+
 public interface ProductMenu {
 
-	public abstract void showMenu();
+	public abstract void showMenu() throws FileNotFoundException;
 
 	public abstract void showAddButton();
 
@@ -12,4 +15,5 @@ public interface ProductMenu {
 
 	public abstract void showComboxes();
 
+	Iterator createIterator();
 }
