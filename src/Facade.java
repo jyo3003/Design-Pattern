@@ -15,7 +15,7 @@ public class Facade {
 	public boolean login() throws IOException {
 		System.out.println("Implementing FACADE DESIGN PATTERN:");
 		//To handle exceptions
-		try{
+		try {
 			Scanner sc = new Scanner(System.in);
 			//To get username and password from terminal
 			System.out.println("Enter the Username:");
@@ -37,13 +37,11 @@ public class Facade {
 
 			//checking if the given user is buyer
 			String line1 = buffer_buyer.readLine();
-			while(line1 != null)
-			{
+			while (line1 != null) {
 				String[] credentials = line1.split(":");
-				if((credentials[0].equals(userName)) && (credentials[1].equals(userPassword)))
-				{
+				if ((credentials[0].equals(userName)) && (credentials[1].equals(userPassword))) {
 					System.out.println("It is a matched Buyer");
-					userType=0;
+					userType = 0;
 					//creating a UserInfoItem object for buyer
 					UserInfoItem userinfoitem = new UserInfoItem();
 					userinfoitem.name = userName;
@@ -55,81 +53,40 @@ public class Facade {
 
 			}
 			//checking if the given user is seller
-			if(userType == Integer.MAX_VALUE) { //Only checking this if the user is not a buyer, to save time.
+			if (userType == Integer.MAX_VALUE) { //Only checking this if the user is not a buyer, to save time.
 				String line2 = buffer_seller.readLine();
 				while (line2 != null) {
-					String[] credentials2 = line2.split(":");
-					if ((credentials2[0].equals(userName)) && (credentials2[1].equals(userPassword))) {
+					String[] credentials = line2.split(":");
+					if ((credentials[0].equals(userName)) && (credentials[1].equals(userPassword))) {
 						System.out.println("It is a matched Seller");
 						userType = 1;
-						//creating a UserInfoItem object for seller
+						//creating a UserInfoItem object for buyer
 						UserInfoItem userinfoitem = new UserInfoItem();
 						userinfoitem.name = userName;
 						userinfoitem.usertype = UserType.Seller;
 						createUser(userinfoitem);
 						break;
 					}
-					line2 = buffer_seller.readLine();
+					line1 = buffer_buyer.readLine();
 				}
 			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+		}catch(IOException e){
+				throw new RuntimeException(e);
+			}
+			if(userType != Integer.MAX_VALUE) return true;
 
-		//If the user entered credentials matches, then using ITERATOR DESIGN PATTERN to print products list
-		//And using BRIDGE PATTERN to show the menu depending on which kind of product is selected, i.e., meat or produce
-		if(userType != Integer.MAX_VALUE){
-			System.out.println("Implementing ITERATOR DESIGN PATTERN:");
-			System.out.println("Press 1 to see the complete Menu, 2 to see the Meat menu and 3 to see the Produce Menu");
-			if(userType == 1){
-				System.out.println("Enter 4 to add any items to the menu");
-			}
-			Scanner sc = new Scanner(System.in);
-			int type = sc.nextInt();
-
-			if(type == 1) {
-				ClassProductList classProductList = new ClassProductList();
-				Iterator iterator = classProductList.createIterator(); //creating an iterator to iterate through list
-				ProductIterator productIterator = new ProductIterator();
-				while (productIterator.hasNext(iterator)) {
-					Product product = productIterator.Next(iterator);
-					if (product.getnProductCategory() == 0) {
-						System.out.println("Meat" + " : " + product.getproductName());
-					}
-					else{
-						System.out.println("Produce" + " : " + product.getproductName());
-					}
-				}
-			}
-			else if(type == 2){
-				//Calling to view the user corresponding menu
-				productOperation(0);
-			}
-			else if(type == 3){
-				//Calling to view the user corresponding menu
-				productOperation(1);
-			}
-			else{
-				System.out.println("Enter the category of the item you want to add");
-				String itemType = sc.next();
-				System.out.println("Enter the name of the item you want to add");
-				String itemName = sc.next();
-				Seller seller = new Seller();
-				seller.addToMenu(itemType,itemName);
-			}
-			return true;
-		}
-
-
-        return false;
+		return false;
 	}
 
-	public void createUser(UserInfoItem userInfoItem1) {
+	public void createUser(UserInfoItem userInfoItem1) throws IOException {
 		if (userInfoItem1.usertype.equals(UserType.Buyer)) {
 			thePerson = new Buyer();
+			thePerson.showMenu();
 		} else if (userInfoItem1.usertype.equals(UserType.Seller)) {
 			thePerson = new Seller();
+			thePerson.showMenu();
+			System.out.println("Do you wish to add a trade for any product");
+
 		}
 	}
 

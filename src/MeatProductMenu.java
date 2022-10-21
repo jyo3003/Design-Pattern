@@ -23,17 +23,11 @@ public class MeatProductMenu implements ProductMenu {
 					//creating only Meat Products to add to the list
 					Product product = new Product(category, products[1]);
 					productList.add(product);
-				} else if (products[0].equals("Produce")) {
-					category = 1;
-				} else {
-					System.out.println("Wrong or Invalid product");
-					System.out.println("exit...");
-
-					// Terminate JVM
-					System.exit(0);
 				}
 
 			}
+			ProductIterator productIterator = new ProductIterator();
+			productIterator.productListIterator(productList);
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {

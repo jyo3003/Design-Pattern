@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ProductIterator {
@@ -20,6 +22,20 @@ public class ProductIterator {
 		}
 	}
 
+	static void productListIterator(ArrayList<Product> productList) throws FileNotFoundException {
+
+		System.out.println("Implementing ITERATOR DESIGN PATTERN");
+		for(int i=0;i< productList.size();i++){
+			if(productList.get(i).getnProductCategory() == 0){
+				System.out.println("Meat:" + productList.get(i).getproductName());
+			}
+			else{
+				System.out.println("Produce:" + productList.get(i).getproductName());
+			}
+		}
+
+	}
+
 	@SuppressWarnings("rawtypes")
 	public void MoveToHead(Iterator classProductListIterator) {
 		System.out.println("Head is moved..");
@@ -34,4 +50,6 @@ public class ProductIterator {
 
 	}
 
+	public void iterator(ArrayList<Product> productList) {
+	}
 }

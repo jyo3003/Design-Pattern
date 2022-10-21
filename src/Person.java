@@ -1,6 +1,8 @@
+import java.io.IOException;
+
 public class Person {
 
-	public void showMenu() {
+	public void showMenu() throws IOException {
 
 	}
 

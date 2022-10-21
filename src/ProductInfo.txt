@@ -4,3 +4,7 @@ Meat:Mutton
 Produce:Tomato
 Produce:Onion
 Meat:Chicken
+Produce:Potato
+Produce:Garlic
+Produce:Chilli
+Meat:Crab
