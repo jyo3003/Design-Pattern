@@ -8,3 +8,5 @@ Produce:Potato
 Produce:Garlic
 Produce:Chilli
 Meat:Crab
+Meat:Fish
+Meat:Bird

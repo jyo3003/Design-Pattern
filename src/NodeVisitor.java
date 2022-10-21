@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class NodeVisitor {
 
 	public void visitProduct(Product product) {
@@ -8,7 +10,7 @@ public class NodeVisitor {
 
 	}
 
-	public void visitFacade(Facade facade) {
+	public void visitFacade(Facade facade) throws IOException {
 
 	}
 

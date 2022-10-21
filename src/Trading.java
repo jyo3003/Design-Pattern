@@ -13,11 +13,15 @@ public class Trading {
 		this.price = price;
 	}
 
+	public Trading() {
+
+	}
+
 	public void setTrade(String seller, Product product, int price) throws IOException {
 		File trade = new File("src/trade.txt");
 		trade.createNewFile();
 		FileWriter trade_file = new FileWriter(trade, true);
-		trade_file.write(seller + ":" + product+ ":"+ +price);
+		trade_file.write(seller + ":" + product.getproductName() + ":" + product.getnProductCategory()+ ":"+ +price);
 		trade_file.close();
 	}
 
@@ -28,13 +32,12 @@ public class Trading {
 		BufferedReader buffer_product = new BufferedReader(product_file);
 		String line;
 		while ((line = buffer_product.readLine()) != null) {
-			Object[] temp = line.split(":");
+			String[] temp = line.split(":");
 			int category = Integer.MAX_VALUE;
-			Product product1 = (Product) temp[1];
-			if(product1.getnProductCategory() == product.getnProductCategory() && product1.getproductName() == product.getproductName()){
-				int seller_price = (Integer) temp[2];
+			if(Integer.parseInt(temp[2]) == product.getnProductCategory() && temp[1].equals(product.getproductName())){
+				int seller_price = Integer.parseInt(temp[3]);
 				if(buyer_price >= seller_price ){
-					System.out.println(buyer + " bought the product "+product.getproductName()+" from " + temp[0] + " for " + temp[2] + " dollars.");
+					System.out.println(buyer + " bought the product "+product.getproductName()+" from " + temp[0] + " for " + temp[3] + " dollars.");
 				}
 				else{
 					System.out.println("The seller bid is higher than buyer bid");

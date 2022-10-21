@@ -67,7 +67,7 @@ public class Facade {
 						createUser(userinfoitem);
 						break;
 					}
-					line1 = buffer_buyer.readLine();
+					line2 = buffer_buyer.readLine();
 				}
 			}
 		}catch(IOException e){
@@ -82,11 +82,13 @@ public class Facade {
 		if (userInfoItem1.usertype.equals(UserType.Buyer)) {
 			thePerson = new Buyer();
 			thePerson.showMenu();
-		} else if (userInfoItem1.usertype.equals(UserType.Seller)) {
+			ReminderVisitor.visitMenu(userInfoItem1);
+
+		}
+		else if (userInfoItem1.usertype.equals(UserType.Seller)) {
 			thePerson = new Seller();
 			thePerson.showMenu();
-			System.out.println("Do you wish to add a trade for any product");
-
+			ReminderVisitor.visitMenu(userInfoItem1);
 		}
 	}
 
@@ -95,36 +97,24 @@ public class Facade {
 	}
 
 
-	//Can implement BRIDGE DESGN Pattern
-	public void productOperation(int type) throws FileNotFoundException {
-		System.out.println("Implementing BRIDGE and FACTORY DESIGN PATTERN:");
-		ProductMenu meatOrProduct;  // Using Factory Design Pattern
-		if(type == 0){//Meat
-			meatOrProduct = new MeatProductMenu();
-			meatOrProduct.showMenu();
-			Iterator iterator = meatOrProduct.createIterator(); //creating an iterator to iterate through list
-			ProductIterator productIterator = new ProductIterator();
-			while (productIterator.hasNext(iterator)) {
-				Product product = productIterator.Next(iterator);
-				System.out.println("Meat" + " : " + product.getproductName());
-			}
+	public void addTrading() throws IOException {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Do you wish to bid a trade for any product- yes/no");
+		String temp = sc.next();
+		if(temp.equals("yes")) {
+			System.out.println("Enter the name of the product");
+			String productName = sc.next();
+			System.out.println("Enter the type of the product");
+			int productType;
+			if (sc.next().equals("Meat")) productType = 0;
+			else productType = 1;
+			System.out.println("Enter your price for" + productName);
+			int price = sc.nextInt();
+			Trading trade = new Trading();
+			Product product = new Product(productType, productName);
+			trade.makeTrade(userName, product, price);
 		}
-		else {
-			meatOrProduct = new ProduceProductMenu();
-			meatOrProduct.showMenu();
-			Iterator iterator = meatOrProduct.createIterator(); //creating an iterator to iterate through list
-			ProductIterator productIterator = new ProductIterator();
-			while (productIterator.hasNext(iterator)) {
-				Product product = productIterator.Next(iterator);
-				System.out.println("Produce" + " : " + product.getproductName());
-		    }
-
-		}
-
-	}
-
-	public void addTrading() {
-
+		else System.exit(0);
 	}
 
 	public void viewTrading() {
@@ -138,8 +128,24 @@ public class Facade {
 	public void discussBidding() {
 
 	}
-	public void submitBidding() {
-
+	public void submitBidding() throws IOException {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Do you wish to add a trade for any product- yes/no");
+		String temp = sc.next();
+		if(temp.equals("yes")) {
+			System.out.println("Enter the name of the product");
+			String productName = sc.next();
+			System.out.println("Enter the type of the product");
+			int productType;
+			if (sc.next().equals("Meat")) productType = 0;
+			else productType = 1;
+			System.out.println("Enter your price for" + productName);
+			int price = sc.nextInt();
+			Trading trade = new Trading();
+			Product product = new Product(productType, productName);
+			trade.setTrade(userName, product, price);
+		}
+		else System.exit(0);
 	}
 
 	public void remind() throws FileNotFoundException {
