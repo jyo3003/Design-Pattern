@@ -10,3 +10,4 @@ Produce:Chilli
 Meat:Crab
 Meat:Fish
 Meat:Bird
+Produce:Carrots
