@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-
+//////***************FACADE DESIGN PATTERN*********//////
 public class Facade {
 
 	private int userType = Integer.MAX_VALUE;

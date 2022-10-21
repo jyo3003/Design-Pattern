@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+//////***************VISITOR DESIGN PATTERN*********//////
 public class ReminderVisitor extends NodeVisitor {
 
 	private Reminder m_Reminder;

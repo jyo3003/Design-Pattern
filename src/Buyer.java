@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Buyer extends Person {
 
-
+	//////***************BRIDGE DESIGN PATTERN*********//////
 	public void showMenu() throws IOException {
 		System.out.println("Implementing BRIDGE DESIGN PATTERN");
 			System.out.println("Press 1 to see the complete Menu, 2 to see the Meat menu and 3 to see the Produce Menu");
@@ -16,6 +16,7 @@ public class Buyer extends Person {
 			if (type == 1) {
 				completeProductListIterator();
 			} else if (type == 2) {
+				//////***************FACTORY DESIGN PATTERN*********//////
 				System.out.println("Implementing FACTORY DESIGN PATTERN");
 				ProductMenu meatProductMenu = new MeatProductMenu();
 				meatProductMenu.showMenu();
