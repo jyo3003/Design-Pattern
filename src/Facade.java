@@ -12,7 +12,7 @@ public class Facade {
 	String userPassword;
 
 
-	public boolean login() throws FileNotFoundException {
+	public boolean login() throws IOException {
 		System.out.println("Implementing FACADE DESIGN PATTERN:");
 		//To handle exceptions
 		try{
@@ -51,14 +51,14 @@ public class Facade {
 					createUser(userinfoitem);
 					break;
 				}
-				buffer_buyer.readLine();
+				line1 = buffer_buyer.readLine();
 
 			}
 			//checking if the given user is seller
 			if(userType == Integer.MAX_VALUE) { //Only checking this if the user is not a buyer, to save time.
 				String line2 = buffer_seller.readLine();
 				while (line2 != null) {
-					String[] credentials2 = line1.split(":");
+					String[] credentials2 = line2.split(":");
 					if ((credentials2[0].equals(userName)) && (credentials2[1].equals(userPassword))) {
 						System.out.println("It is a matched Seller");
 						userType = 1;
@@ -69,7 +69,7 @@ public class Facade {
 						createUser(userinfoitem);
 						break;
 					}
-					buffer_seller.readLine();
+					line2 = buffer_seller.readLine();
 				}
 			}
 		}
@@ -82,7 +82,9 @@ public class Facade {
 		if(userType != Integer.MAX_VALUE){
 			System.out.println("Implementing ITERATOR DESIGN PATTERN:");
 			System.out.println("Press 1 to see the complete Menu, 2 to see the Meat menu and 3 to see the Produce Menu");
-
+			if(userType == 1){
+				System.out.println("Enter 4 to add any items to the menu");
+			}
 			Scanner sc = new Scanner(System.in);
 			int type = sc.nextInt();
 
@@ -104,9 +106,17 @@ public class Facade {
 				//Calling to view the user corresponding menu
 				productOperation(0);
 			}
-			else{
+			else if(type == 3){
 				//Calling to view the user corresponding menu
 				productOperation(1);
+			}
+			else{
+				System.out.println("Enter the category of the item you want to add");
+				String itemType = sc.next();
+				System.out.println("Enter the name of the item you want to add");
+				String itemName = sc.next();
+				Seller seller = new Seller();
+				seller.addToMenu(itemType,itemName);
 			}
 			return true;
 		}
@@ -190,7 +200,5 @@ public class Facade {
 	public void SelectProduct() {
 
 	}
-
-
 
 }
